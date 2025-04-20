@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -85,14 +85,14 @@ header p {
 
 .preview-container {
     position: relative;
-    max-height: 400px;
+    max-height: 500px;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .preview-container img {
-    max-height: 400px;
+    max-height: 500px;
     max-width: 100%;
     object-fit: contain;
     border-radius: var(--radius);
@@ -200,13 +200,15 @@ button:disabled {
     white-space: pre-wrap;
     font-family: monospace;
     min-height: 150px;
-    max-height: 400px;
+    max-height: 600px;
     overflow-y: auto;
     border: 1px solid var(--border-color);
     line-height: 1.5;
     tab-size: 4;
     -moz-tab-size: 4;
     text-align: left;
+    word-wrap: break-word;
+    font-size: 14px;
 }
 
 .loading {
@@ -241,9 +243,16 @@ button:disabled {
     display: none !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .container {
         padding: 15px;
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
     }
     
     header h1 {
