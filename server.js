@@ -36,7 +36,7 @@ app.post('/api/extract-text', async (req, res) => {
         {
           role: "user",
           content: [
-            { type: "text", text: "OCR this image and extract all the text content. Return only the text without additional explanation." },
+            { type: "text", text: "OCR this image and extract all the text content. Preserve the original formatting as much as possible, including paragraphs, bullet points, tables, indentation, and line breaks. If there are multiple columns, maintain the reading order. Do not add any explanations, just return the formatted text exactly as it appears in the image." },
             {
               type: "image_url",
               image_url: {

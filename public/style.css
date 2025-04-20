@@ -204,6 +204,9 @@ button:disabled {
     overflow-y: auto;
     border: 1px solid var(--border-color);
     line-height: 1.5;
+    tab-size: 4;
+    -moz-tab-size: 4;
+    text-align: left;
 }
 
 .loading {
