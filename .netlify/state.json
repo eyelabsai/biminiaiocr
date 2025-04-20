@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Columbia",
+			"country": {
+				"code": "US",
+				"name": "United States"
+			},
+			"subdivision": {
+				"code": "MO",
+				"name": "Missouri"
+			},
+			"timezone": "America/Chicago",
+			"latitude": 38.9336,
+			"longitude": -92.363,
+			"postalCode": "65203"
+		},
+		"timestamp": 1745108867225
+	}
+}
