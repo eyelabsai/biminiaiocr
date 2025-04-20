@@ -28,6 +28,16 @@
                     <button id="change-image"><i class="fas fa-sync-alt"></i></button>
                 </div>
             </div>
+            <div class="processing-options">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="biometry-checkbox">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">Extract Biometry Data (AL, K1, K2, ACD, LT, CCT) for OD/OS</span>
+                    <i class="fas fa-info-circle tooltip-icon">
+                        <span class="tooltip-text">When checked, will extract axial length, keratometry values, anterior chamber depth, lens thickness and central corneal thickness for both eyes.</span>
+                    </i>
+                </label>
+            </div>
             <button id="process-button" class="process-button" disabled>
                 <span class="button-text">Extract Text</span>
                 <span class="spinner hidden"><i class="fas fa-spinner fa-spin"></i></span>

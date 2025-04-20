@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropMessage = document.querySelector('.drop-message');
     const changeImageButton = document.getElementById('change-image');
     const loading = document.getElementById('loading');
+    const biometryCheckbox = document.getElementById('biometry-checkbox');
 
     let imageDataUrl = null;
     let processingTimeout;
@@ -155,14 +156,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 15000);
         
         try {
+            // Get biometry checkbox state
+            const extractBiometry = biometryCheckbox.checked;
+            
+            // Create request with image data and biometry flag
+            const requestData = {
+                image: imageDataUrl,
+                extractBiometry: extractBiometry
+            };
+
             const response = await fetch('/api/extract-text', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    image: imageDataUrl
-                })
+                body: JSON.stringify(requestData)
             });
 
             clearTimeout(processingTimeout);

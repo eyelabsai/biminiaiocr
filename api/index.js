@@ -19,14 +19,24 @@ const openai = new OpenAI({
 // API endpoint for OCR
 app.post('/api/extract-text', async (req, res) => {
   try {
-    // Get image data from request
-    const { image } = req.body;
+    // Get image data and options from request
+    const { image, extractBiometry } = req.body;
 
     if (!image) {
       return res.status(400).json({ error: 'No image provided' });
     }
 
-    console.log('Starting OpenAI API call...');
+    console.log('Starting OpenAI API call...', extractBiometry ? 'with biometry extraction' : 'standard OCR');
+    
+    // Create the base prompt
+    let promptText = "OCR this image and extract all the text content. Preserve the original formatting as much as possible, including paragraphs, bullet points, tables, indentation, and line breaks. If there are multiple columns, maintain the reading order.";
+    
+    // Add biometry extraction instructions if requested
+    if (extractBiometry) {
+      promptText += " Additionally, look for and extract biometry data for both eyes (OD = right eye, OS = left eye). For each eye, identify and list the following measurements if present: AL (Axial Length), K1 (Keratometry 1), K2 (Keratometry 2), ACD (Anterior Chamber Depth), LT (Lens Thickness), and CCT (Central Corneal Thickness). Organize these values in a clear table at the end of the text.";
+    } else {
+      promptText += " Do not add any explanations, just return the formatted text exactly as it appears in the image.";
+    }
     
     // Make OpenAI API request with GPT-4o
     const response = await openai.chat.completions.create({
@@ -35,7 +45,7 @@ app.post('/api/extract-text', async (req, res) => {
         {
           role: "user",
           content: [
-            { type: "text", text: "OCR this image and extract all the text content. Preserve the original formatting as much as possible, including paragraphs, bullet points, tables, indentation, and line breaks. If there are multiple columns, maintain the reading order. Do not add any explanations, just return the formatted text exactly as it appears in the image." },
+            { type: "text", text: promptText },
             {
               type: "image_url",
               image_url: {
@@ -45,7 +55,7 @@ app.post('/api/extract-text', async (req, res) => {
           ]
         }
       ],
-      max_tokens: 1024
+      max_tokens: 1500
     });
 
     console.log('OpenAI API call completed successfully');
